@@ -1,0 +1,101 @@
+:root {
+    --widget-width: 150px;
+    --widget-height: 150px;
+}
+
+* {
+    position: relative;
+}
+
+body {
+    background-color: rgb(0, 39, 0);
+}
+
+h1, h2 {
+    color: white;
+    text-align: center;
+}
+
+#store-container {
+    border: 5px solid white;
+    width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.store {
+    background-color: aqua;
+    text-align: center;
+    cursor: pointer;
+}
+
+.store p {
+    margin: 2px;
+}
+
+#widget-container {
+    border: 5px solid white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.widget {
+    height: var(--widget-height);
+    width: var(--widget-width);
+    max-height: var(--widget-height);
+    max-width: var(--widget-width);
+    margin: 5px;
+
+    cursor: pointer;
+    
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex: 1 1 var(--widget-width);
+
+    overflow: hidden;
+}
+
+/* If the widget is an automatic widget */
+.widget[auto="true"] {
+    background-color: green;
+    border: 3px solid black;
+}
+
+/* If the widget is a click widget */
+.widget:not([auto="true"]) {
+    background-color: limegreen;
+    border: 3px solid white;
+}
+
+/* Widget with text */
+.widget p {
+    color: white;
+}
+
+/* Widget with image */
+.widget img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Floating point indicator */
+.point {
+    position: absolute;
+    transform-origin: center;
+    color: aqua;
+    animation-name: point-float;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes point-float {
+    100% {
+        opacity: 0%;
+        transform: translateY(-50px);
+    }
+}

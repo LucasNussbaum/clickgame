@@ -1,0 +1,53 @@
+.widget[harvesting] .overlay-static {
+    display: unset;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
+.widget[harvesting] .overlay-slide {
+    display: unset;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    
+    animation-name: uncover;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.widget:not([harvesting]) [class~="overlay"] {
+    display: none;
+}
+
+.store[broke] .overlay-cost {
+    display: unset;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    cursor: default;
+}
+
+.store:not([broke]) .overlay-cost {
+    display: none;
+}
+
+@keyframes uncover {
+    0% {
+        width: 100%;
+    }
+    
+    100% {
+        width: 0%;
+    }
+}
