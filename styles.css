@@ -99,3 +99,14 @@ h1, h2 {
         transform: translateY(-50px);
     }
 }
+
+.widget button {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
