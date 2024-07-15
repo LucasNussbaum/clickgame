@@ -1,4 +1,5 @@
 let stores = document.getElementsByClassName("store");
+let upgrades = document.getElementsByClassName("upgrade");
 let score = document.getElementById("score");
 
 // Generate the display for each store
@@ -33,6 +34,14 @@ for (let store of stores) {
     overlayCost.className = "overlay-cost";
     store.appendChild(overlayCost);
 }
+
+for (let upgrade of upgrades) {
+    fillUpgrade(upgrade)
+    upgrade.onclick = () => {
+        buyUpgrade(upgrade);
+    }
+}
+
 changeScore(0); // Trigger blocking out the stores by price
 
 function fillWidget(store, widget) {
@@ -64,4 +73,33 @@ function fillWidget(store, widget) {
     overlaySlide.className = "overlay-slide";
     overlaySlide.style.animationDuration = `${store.getAttribute("cooldown")}s`;
     widget.appendChild(overlaySlide);
+}
+
+
+function fillUpgrade(upgrade) {
+    if (upgrade.hasAttribute("src")) {
+        upgrade.style.backgroundImage = `url(${upgrade.getAttribute("src")})`;
+        upgrade.style.backgroundSize = "cover";
+        upgrade.style.backgroundPosition = "center";
+    } else if (upgrade.hasAttribute("text")) {
+        let para = document.createElement("p");
+        para.innerHTML = upgrade.getAttribute("text");
+        upgrade.appendChild(para);
+    }
+
+    // Copy attributes from the upgrade to the upgrade
+    ["reap", "cooldown", "auto", "name"].forEach((attr) => {
+        upgrade.setAttribute(attr, upgrade.getAttribute(attr));
+    });
+
+    // Add the cooldown tint
+    let overlayStatic = document.createElement("div");
+    overlayStatic.className = "overlay-static";
+    upgrade.appendChild(overlayStatic);
+    
+    // Add the sliding cooldown timer
+    let overlaySlide = document.createElement("div");
+    overlaySlide.className = "overlay-slide";
+    overlaySlide.style.animationDuration = `${upgrade.getAttribute("cooldown")}s`;
+    upgrade.appendChild(overlaySlide);
 }

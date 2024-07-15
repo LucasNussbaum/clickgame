@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gompei's Grass Game</title>
     <link rel="stylesheet" href="overlays.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,15 +11,21 @@
     <h1>Gompei's Grass Game</h1>
     <h2>Score: <span id="score">5</span></h2>
     <div id="store-container">
-        <div class="store" name="Lawn" cost="5" reap="2" cooldown="0.5"
-        text="Lawn"></div>
-        <div class="store" name="Gompei" cost="15" reap="10" cooldown="2.0" auto="true"
-        src="./gompei.png"></div>
-        <div class="store" name="Super-Gompei" cost="150" reap="1300000000" cooldown="5.0" auto="true"
-        src="./gompei.png"></div>
+        <div class="store" name="Lawn" cost="5" reap="2" cooldown="0.5" text="Lawn"></div>
+        <div class="store" name="Gompei" cost="15" reap="10" cooldown="2.0" auto="true" src="./gompei.png"></div>
+        <div class="store" name="Super-Gompei" cost="150" reap="1300000000" cooldown="5.0" auto="true" src="./gompei.png"></div>
     </div>
-    <div id="widget-container"></div>
     
+    <div id="upgrade-container">
+        <div class="upgrade" name="Fertilizer" cost="10" effect="double-reap" src="./Upgrade.png">
+            <br>Fertilizer: Doubles reap
+        </div>
+    </div>
+    
+    <div id="widget-container"></div>
+  
+    <a href="../index.html" class="previous">&laquo; Home</a>
+  
     <script src="./game.js"></script>
     <script src="./load.js"></script>
 </body>
