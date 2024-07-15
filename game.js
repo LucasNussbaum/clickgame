@@ -1,4 +1,9 @@
 const widgetContainer = document.getElementById("widget-container")
+const maxWidget = 500000;
+
+function getWidgetCount(){
+    return widgetContainer.getElementsByClassName("widget").length
+}
 function buy(store) {
     let bank = parseInt(score.innerHTML);
     let cost = parseInt(store.getAttribute("cost"))
@@ -10,7 +15,15 @@ function buy(store) {
 
     }
 
+if(getWidgetCount() >= maxWidget){
+    alert("max number reached")
+    return
+}
+
+
     changeScore(-1 * cost)
+
+
 
     var widget = document.createElement("div")
     widget.classList.add("widget")
@@ -20,6 +33,34 @@ function buy(store) {
     }
     widgetContainer.appendChild(widget)
     if (widget.getAttribute("auto") == 'true') harvest(widget);
+}
+
+function buyUpgrade(upgrade) {
+    let bank = parseInt(score.innerHTML);
+    let cost = parseInt(upgrade.getAttribute("cost"));
+    console.log(`bank: [${bank}] cost: [${cost}]`)
+    
+    if (bank < cost) {
+        alert("Insufficient funds")
+        return;
+    }
+
+    changeScore(-1 * cost);
+
+    applyUpgrade(upgrade);
+    upgrade.style.display = "none"; // Hide the upgrade after purchase
+}
+
+function applyUpgrade(upgrade) {
+    let effect = upgrade.getAttribute("effect");
+
+    if (effect === "double-reap") {
+        let widgets = document.getElementsByClassName("widget");
+        for (let widget of widgets) {
+            let reap = parseInt(widget.getAttribute("reap"));
+            widget.setAttribute("reap", reap * 2);
+        }
+    }
 }
 
 function harvest(widget) {

@@ -25,7 +25,7 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
-.store {
+.store, .upgrade {
     background-color: aqua;
     text-align: center;
     cursor: pointer;
@@ -42,7 +42,8 @@ h1, h2 {
     flex-wrap: wrap;
 }
 
-.widget {
+
+.widget, .upgrade {
     height: var(--widget-height);
     width: var(--widget-width);
     max-height: var(--widget-height);
@@ -98,4 +99,23 @@ h1, h2 {
         opacity: 0%;
         transform: translateY(-50px);
     }
+}
+
+#upgrade-container {
+    border: 5px solid white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.widget button {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
 }
