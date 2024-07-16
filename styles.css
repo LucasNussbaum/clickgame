@@ -119,3 +119,7 @@ h1, h2 {
     cursor: pointer;
     z-index: 10;
 }
+
+.upgrade1{
+    visibility: hidden;
+}

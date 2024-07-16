@@ -60,6 +60,15 @@ function applyUpgrade(upgrade) {
             let reap = parseInt(widget.getAttribute("reap"));
             widget.setAttribute("reap", reap * 2);
         }
+    } else if (effect === "double-nurse-machine") {
+        let widgets = document.getElementsByClassName("widget");
+        for (let widget of widgets) {
+            let name = widget.getAttribute("name");
+            if (name === "Nurse" || name === "Hospital Machines") {
+                let reap = parseInt(widget.getAttribute("reap"));
+                widget.setAttribute("reap", reap * 2);
+            }
+        }
     }
 }
 
