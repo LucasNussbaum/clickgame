@@ -1,9 +1,10 @@
 const widgetContainer = document.getElementById("widget-container")
-const maxWidget = 500000;
+const maxWidgets = 50;
 
-function getWidgetCount(){
-    return widgetContainer.getElementsByClassName("widget").length
+function getWidgetCount() {
+ return widgetContainer.getElementsByClassName("widget").length;
 }
+
 function buy(store) {
     let bank = parseInt(score.innerHTML);
     let cost = parseInt(store.getAttribute("cost"))
@@ -15,11 +16,10 @@ function buy(store) {
 
     }
 
-if(getWidgetCount() >= maxWidget){
-    alert("max number reached")
-    return
-}
-
+    if(getWidgetCount() >= maxWidgets){
+        alert("Maximun number of gompei's reached");
+        return;
+    }
 
     changeScore(-1 * cost)
 
@@ -31,6 +31,15 @@ if(getWidgetCount() >= maxWidget){
     widget.onclick = () => {
         harvest(widget);
     }
+    // Adds delete button to the widget
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.onclick = (e) => {
+        e.stopPropagation
+        deleteWidget(widget);
+    }
+    widget.appendChild(deleteButton);
+
     widgetContainer.appendChild(widget)
     if (widget.getAttribute("auto") == 'true') harvest(widget);
 }
@@ -74,7 +83,7 @@ function applyUpgrade(upgrade) {
 
 function harvest(widget) {
     // Only run if currently not harvesting
-    if (widget.hasAttribute("harvesting")) return;
+    if (widget.hasAttribute("harvesting") || widget.dataset.deleted === "true") return;
     // Set harvesting flag
     widget.setAttribute("harvesting", "")
 
@@ -84,10 +93,11 @@ function harvest(widget) {
         showPoint(widget);
     }
 
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
         // Remove the harvesting flag
         widget.removeAttribute("harvesting")
         // If automatic, collect points
+        if (widget.dataset.deleted === "true") return;
         if (widget.getAttribute("auto") == 'true') {
             changeScore(widget.getAttribute("reap"));
             showPoint(widget);
@@ -95,6 +105,8 @@ function harvest(widget) {
             //Play sound
         }
     }, parseFloat(widget.getAttribute("cooldown")) * 1000);
+
+    widget.dataset.timeoutId = timeoutId; 
 }
 
 function changeScore(amount) {
@@ -123,4 +135,12 @@ function showPoint(widget) {
         widget.removeChild(number);
     }
     widget.appendChild(number);
+}
+
+function deleteWidget(widget) {
+    widget.dataset.deleted = "true";
+    if (widget.dataset.timeoutId) {
+        clearTimeout(widget.dataset.timeoutId);
+    }
+    widgetContainer.removeChild(widget);
 }
